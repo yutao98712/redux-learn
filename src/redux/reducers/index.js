@@ -47,8 +47,8 @@ const posts = (
   }
 }
 
-const postBySubreddit = (state = {}, action) =>{
-  switch(action.stype) {
+const postsBySubreddit = (state = {}, action) =>{
+  switch(action.type) {
     case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
@@ -61,7 +61,7 @@ const postBySubreddit = (state = {}, action) =>{
 }
 
 const rootReducer = combineReducers({
-  postBySubreddit,
+  postsBySubreddit,
   selectedSubreddit
 })
 

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import {
   HashRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
-import { DatePicker } from 'antd';
+import HomePage from './component/management/HomePage';
 class RouterConfig extends Component{
   render() {
     return (
       <Router>
-        <div>
-          {this.props.children}
-          <Route path="/products" component={DatePicker}/>
-        </div>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          <Route exact path="/userCenter" />
+        </Switch>
       </Router>
-      
     )
   }
 }
