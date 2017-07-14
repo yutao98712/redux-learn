@@ -1,43 +1,82 @@
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Switch } from 'react-router-dom';
+import {RouteWithSubRoutes} from '../../route';
+import { 
+  Layout, 
+  Menu, 
+  Breadcrumb, 
+  Icon
+} from 'antd';
+import {
+  Link
+} from 'react-router-dom';
 const { SubMenu } = Menu;
 const {Header, Content, Sider } = Layout;
 
 const Logo = styled.div`
   width: 120px;
-  height: 31px;
-  background: #333;
-  border-radius: 6px;
+  line-height: 31px;
   margin: 16px 28px 16px 0;
+  font-size: 20px;
+  text-align: center;
+  color: #F2F2F2;
   float: left;
 `;
+const ClearFloat = styled.div`
+  clear:both;
+`;
+const Rlayout = styled.div`
+  width: 120px;
+  line-height:64px;
+  float:right;
+  overflow:hidden;
+  color: #F2F2F2;
+  text-align:center;
+  &
+`;
+
+
+
 class HomePage extends Component {
   render() {
+    const { routes } = this.props;
     return (
       <Layout>
-        <Header className="header" style={{ position: 'fixed', width: '100%'}}>
-          <Logo />
+        <Header className="header" style={{ position: 'fixed', width: '100%', overflow: 'hidden'}}>
+          <Logo><span>项目管理系统</span></Logo>
           <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
+            style={{ 
+              lineHeight: '64px', 
+              float: 'left'
+            }}
           >
             <Menu.Item key="1">nav 1</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item>
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
+          <Rlayout>
+            <Link to="/"><Icon type="question-circle-o" style={{ fontSize: 12}}></Icon>&nbsp;<span>帮助</span></Link>
+            &nbsp;&nbsp;&nbsp;
+            <Link to="/"><Icon type="login" style={{ fontSize: 20, verticalAlign: 'middle'}}></Icon>&nbsp;<span>登陆</span></Link>
+          </Rlayout>
+          <ClearFloat />
         </Header>
-      
-        <Layout style={{minHeight:'100vh',marginTop:'64px'}}>
-          <Sider width={210} style={{
-            background:'#fff',
-            osverflowY:'auto',
-            overflowX:'hidden',
-            height:(window.innerHeight-64)+'px',
-            position:'fixed'}}
-            onmouseWheel = {(e)=>{console.log(1)}}
+
+        <Layout style={{minHeight:'100vh',marginTop: 64}}>
+          <Sider 
+            width={210} 
+            style={{
+              background:'#fff',
+              osverflowY:'auto',
+              overflowX:'hidden',
+              height:(window.innerHeight-64)+'px',
+              position:'fixed',
+            }}
           > 
             <Menu
               mode="inline"
@@ -71,14 +110,18 @@ class HomePage extends Component {
               </SubMenu>
             </Menu>
           </Sider>
-          <Layout style={{ padding: '0 24px 24px', marginLeft: '210px'}}>
+          <Layout style={{ padding: '0 24px 24px', marginLeft: 210}}>
             <Breadcrumb style={{ margin: '12px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-              Content
+              <Switch>
+                { routes.map((route, i) => (
+                  <RouteWithSubRoutes {...route} key={i}/>
+                ))}
+              </Switch>
             </Content>
           </Layout>
         </Layout>

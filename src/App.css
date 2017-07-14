@@ -6,6 +6,11 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+body,a,al,ul,ol {
+  text-align: none;
+}
+
+
 body::-webkit-scrollbar {
   width: 0.2em;
 }
